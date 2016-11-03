@@ -1,0 +1,41 @@
+Frontend
+
+1. Install node.js
+2. Install npm 
+npm install bower -g
+npm install gulp -g
+
+Angularjs
+
+Path var : C:/Windows/System32
+C:\Program Files (x86)\Java\jdk1.8.0_31\bin;
+C:\Program Files (x86)\Skype\Phone\;
+C:\Program Files\nodejs\;
+C:\Program Files\Git\cmd;
+C:\Program Files (x86)\Python;
+C:\Windows\System32;
+C:\Program Files (x86)\Python\Scripts
+
+Bower: Front End Package Manager
+ bower install // Downloads all depdencies
+ bower install <PACKAGE NNAME> --save
+
+ Gulp: Run the project
+ gulp serve 
+ gulp build - locate /dist
+ gulp clean 
+ 
+ 
+ 
+ Backend:
+ Python Version 2
+ pip - Python Package Manager
+ 
+ Installing Dependencies:
+ pip install flask
+ pip install dnsypthon
+ 
+ python F546_Flask.py
+
+cd C:\Users\Ly\Desktop\FYP\F546-master\F546-master
+cd C:\Users\Ly\Desktop\FYP\F546_FlaskServer-master

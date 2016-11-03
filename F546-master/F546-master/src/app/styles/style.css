@@ -1,0 +1,149 @@
+/*#tr_plot_cytoscape {*/
+/*height: 800px;*/
+/*!*width: 1200px;*!*/
+/*!*height: 100%;*!*/
+/*!*width: 100%;*!*/
+/*border-style: solid;*/
+/*border-width: 1px;*/
+
+/*}*/
+
+#traceroute_noduplicate {
+  height: 800px;
+  /*width: 1200px;*/
+  /*height: 100%;*/
+  /*width: 100%;*/
+  border-style: solid;
+  border-width: 1px;
+
+}
+
+#cytoscape_bandwidth {
+  height: 800px;
+  /*width: 1200px;*/
+  /*height: 100%;*/
+  /*width: 100%;*/
+  border-style: solid;
+  border-width: 1px;
+
+}
+/*Traceroute Graph WITH duplicated path*/
+#traceroute_graph_cytoscape {
+  height: 800px;
+  /*height: 100%;*/
+  width: 100%;
+  border-style: dotted;
+  border-width: 1px;
+
+}
+
+#latency_graph_cytoscape {
+  height: 800px;
+  /*width: 1200px;*/
+  /*height: 100%;*/
+  width: 100%;
+  border-style: dotted;
+  border-width: 1px;
+
+}
+#latency_metadata_summary {
+  height: 100%;
+  /*width: 1200px;*/
+  /*height: 100%;*/
+  width: 100%;
+  border-style: dotted;
+  border-width: 1px;
+
+}
+
+#latency_graph_cytoscape_traceroute {
+  height: 600px;
+  /*width: 1200px;*/
+  /*height: 100%;*/
+  width: 100%;
+  border-style: dotted;
+  border-width: 1px;
+
+}
+/*traceroute_path.html*/
+#traceroute_path_graph_cytoscape {
+  height: 800px;
+  /*width: 1200px;*/
+  /*height: 100%;*/
+  width: 100%;
+  border-style: dotted;
+  border-width: 1px;
+
+}
+/*traceroute_path.html*/
+#individual_traceroute_path_graph {
+  height: 600px;
+  /*width: 1200px;*/
+  /*height: 100%;*/
+  width: 100%;
+  border-style: dotted;
+  border-width: 1px;
+
+}
+
+/*For bootstrap tooltip*/
+/*.tooltip-inner {*/
+  /*white-space:pre;*/
+  /*max-width:none;*/
+/*}*/
+
+
+
+/*#LatencyInformation {*/
+  /*height: 800px;*/
+  /*!*width: 1200px;*!*/
+  /*!*height: 100%;*!*/
+  /*!*width: 100%;*!*/
+  /*border-style: solid;*/
+  /*border-width: 1px;*/
+
+/*}*/
+
+/*.angular-google-map-container {*/
+  /*height: 800px;*/
+  /*width: 1000px;*/
+/*}*/
+
+
+/*FOR MODAL CLASS*/
+.app-modal-window .modal-dialog {
+  width: 90%;
+}
+
+
+/* FOR NESTED LIST ON LATENCY.HTML */
+
+.just-padding {
+  padding: 15px;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+}
+
+.list-group.list-group-root > .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 30px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 45px;
+}
