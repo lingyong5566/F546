@@ -1,0 +1,64 @@
+[uwsgi]
+module = wsgi:app
+
+master = true
+processes = 5
+
+socket = F546App.sock
+chmod-socket = 660
+vacuum = true
+
+die-on-term = true
+
+
+[Unit]
+Description=uWSGI instance to serve F546 App
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/var/F546Backend/F546_Flask
+Environment="PATH=/var/F546Backend/VirtualEnvr_F546/bin"
+ExecStart=/var/F546Backend/VirtualEnvr_F546/bin/uwsgi --ini FlaskApp.ini
+
+[Install]
+WantedBy=multi-user.target
+
+
+server {
+    listen 80;
+    server_name 203.30.39.133;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:///var/F546Backend/F546_Flask/F546App.sock;
+    }
+}
+
+CORS:
+
+1. Edit Nginx config files: http://blog.themillhousegroup.com/2013/05/nginx-as-cors-enabled-https-proxy.html
+Add into the default, same server clause
+
+  listen 8080 default_server;
+  listen [::]:8080 default_server;
+  server_name localhost;
+
+
+
+  # Make sure you specify all the methods and Headers
+  # you send with any request!
+  more_set_headers 'Access-Control-Allow-Origin: *';
+  #more_set_headers 'Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE';
+  #more_set_headers 'Access-Control-Allow-Credentials: true';
+  #more_set_headers 'Access-Control-Allow-Headers: Origin,Content-Type,Accept';
+
+  location /cors/  {
+    #include sites-available/cors-options.conf;
+    proxy_pass http://ps2.jp.apan.net/esmond/perfsonar/archive/;
+  }
+
+ 2. Open Firewall: https://www.digitalocean.com/community/tutorials/how-to-setup-a-firewall-with-ufw-on-an-ubuntu-and-debian-cloud-server
+ sudo ufw status
+ sudo ufw allow 8080
