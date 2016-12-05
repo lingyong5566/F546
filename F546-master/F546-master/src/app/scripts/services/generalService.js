@@ -27,7 +27,7 @@ generalServices.service('HWForecast', function() {
 
   this.HWFunction = function(respObj, alpha)
   {
-    console.log("HWForecasting");
+    //console.log("HWForecasting");
 
     var series = []
     for (j = 0; j < respObj.length; j++) {
