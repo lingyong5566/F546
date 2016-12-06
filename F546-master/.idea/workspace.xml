@@ -23,28 +23,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TracerouteCtrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Traceroute/TracerouteCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="8" column="258" selection-start-line="8" selection-start-column="234" selection-end-line="8" selection-end-column="258" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bandwidth.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/F546-master/src/bandwidth.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3400">
-              <caret line="200" column="43" selection-start-line="200" selection-start-column="31" selection-end-line="200" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="tracerouteService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/services/tracerouteService.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -58,8 +36,18 @@
       <file leaf-file-name="BandwidthCtrl.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Bandwidth/BandwidthCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-561">
-              <caret line="66" column="69" selection-start-line="66" selection-start-column="69" selection-end-line="66" selection-end-column="69" />
+            <state relative-caret-position="408">
+              <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DelayCtrl.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Ping/DelayCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -131,7 +119,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/F546-master/src/onewaydelay.html" />
-        <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Ping/DelayCtrl.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Bandwidth/SearchBW.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/HoltWinterForecast.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Latency/LatencyCtrl.js" />
@@ -145,6 +132,7 @@
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Traceroute/TracerouteMainCtrl.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/tracerouteService.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/generalService.js" />
+        <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Ping/DelayCtrl.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Bandwidth/BandwidthCtrl.js" />
       </list>
     </option>
@@ -371,6 +359,44 @@
               <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ping" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="F546-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="F546-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="F546-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Latency" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -506,15 +532,15 @@
       <workItem from="1477725311013" duration="5577000" />
       <workItem from="1478141792350" duration="1052000" />
       <workItem from="1480721282119" duration="6603000" />
-      <workItem from="1480903766708" duration="12011000" />
+      <workItem from="1480903766708" duration="16327000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111266000" />
+    <option name="totallyTimeSpent" value="115582000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1856" height="1088" extended-state="7" />
+    <frame x="-4" y="-4" width="1856" height="1088" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14393939" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -825,21 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Ping/DelayCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1952">
-          <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Latency/LatencyCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/F546-master/src/onewaydelay.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2754">
@@ -930,10 +941,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Latency/LatencyCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Ping/DelayCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Bandwidth/BandwidthCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-561">
-          <caret line="66" column="69" selection-start-line="66" selection-start-column="69" selection-end-line="66" selection-end-column="69" />
+        <state relative-caret-position="408">
+          <caret line="24" column="23" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
           <folding />
         </state>
       </provider>

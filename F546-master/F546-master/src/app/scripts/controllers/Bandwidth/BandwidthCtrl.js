@@ -61,7 +61,6 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
     return $q.all(promises);
 
 
-
   }).then(function (response) {
     for (j = 0; j < response.length; j++) {
       reverseCurrentMetakey[j] = response[j].data[0]['metadata-key'];
@@ -69,6 +68,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
       reverseDestination[j] = response[j].data[0]['destination'];
     }
   }).then(function (response) {
+    var promises = [];
     // Might have empty result sets because it might not have reverse traffic
     // Have more than one result set
     for (i = 0; i < respLength; i++) {
@@ -81,89 +81,102 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
       // Problems: Request does not finish and assigned null values to array.
       // Solution: Index in the response scope so that it get updated AFTER it gets data.
       // Attempts to resolve then function exiting before completion.
-      $http.get(curURL).then(function (resp) {
-        //for (j = 0; j < resp.data.length; j++) {
-        for (j = 0; j < resp.data.length; j++) {
-          var date1 = UnixTimeConverterService.getDate(resp.data[j]['ts']);
-          var date2 = date1[1] + " " + date1[0] + " " + date1[2];
-          var time1 = UnixTimeConverterService.getTime(resp.data[j]['ts']);
-          var time2 = time1[0] + ":" + time1[1] + ":" + time1[2] + "" + time1[3];
+      promises.push($http.get(curURL));
+      //$http.get(curURL)
 
-          resp.data[j]['ts'] = time2 + " " + date2;
-          resp.data[j]['val'] = math.round((resp.data[j]['val'] / 1000 / 1000), 3);
-        }
-        HWForecastResult[promiseIndex] = HWForecast.HWFunction(resp.data, FCindex);
-        //console.log("HWForecastResult["+promiseIndex+"] : "+HWForecastResult[promiseIndex]);
-        //console.log("resp1 " + promiseIndex + "= " + resp.data);
-        fullDataList[promiseIndex] = resp.data;
-        //console.log("fulldataList " + promiseIndex + "= " + fullDataList[promiseIndex]);
-        //console.log("fulldataList = " + fullDataList);
-        $scope.fullDataList = fullDataList;
-        promiseIndex = promiseIndex + 1;
+    }
 
-      });
+    return $q.all(promises);
+  }).then(function (resp) {
+    //for (j = 0; j < resp.data.length; j++) {
+    var promises = [];
+    for (i = 0; i < resp.length; i++) {
 
-      console.log("reverseCurrentMetakey : " +reverseCurrentMetakey[i]);
+      for (j = 0; j < resp[i].data.length; j++) {
+        var date1 = UnixTimeConverterService.getDate(resp[i].data[j]['ts']);
+        var date2 = date1[1] + " " + date1[0] + " " + date1[2];
+        var time1 = UnixTimeConverterService.getTime(resp[i].data[j]['ts']);
+        var time2 = time1[0] + ":" + time1[1] + ":" + time1[2] + "" + time1[3];
+
+        resp[i].data[j]['ts'] = time2 + " " + date2;
+        resp[i].data[j]['val'] = math.round((resp[i].data[j]['val'] / 1000 / 1000), 3);
+      }
+      HWForecastResult[i] = HWForecast.HWFunction(resp[i].data, FCindex);
+      //console.log("HWForecastResult["+promiseIndex+"] : "+HWForecastResult[promiseIndex]);
+      //console.log("resp1 " + promiseIndex + "= " + resp.data);
+      fullDataList[i] = resp[i].data;
+      //console.log("fulldataList " + promiseIndex + "= " + fullDataList[promiseIndex]);
+      //console.log("fulldataList = " + fullDataList);
+      //$scope.fullDataList = fullDataList;
+
+      console.log("reverseCurrentMetakey : " + reverseCurrentMetakey[i]);
+
       var urlReverseTrafficSub = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + reverseCurrentMetakey[i] + "/throughput/base?time-range=" + timerange;
       console.log("urlReverseTrafficSub = " + urlReverseTrafficSub);
       //"&time-start="+convertedTimeStartStamp+"&time-end="+convertedTimeEndStamp;
-      var promise3 = $http.get(urlReverseTrafficSub);
+      promises.push($http.get(urlReverseTrafficSub));
       // Enter the json data.
-      promise3.then(function (resp2) {
-        for (k = 0; k < resp2.data.length; k++) {
-          var date1 = UnixTimeConverterService.getDate(resp2.data[k]['ts']);
-          var date2 = date1[1] + " " + date1[0] + " " + date1[2];
-          var time1 = UnixTimeConverterService.getTime(resp2.data[k]['ts']);
-          var time2 = time1[0] + ":" + time1[1] + ":" + time1[2] + "" + time1[3];
-          resp2.data[k]['ts'] = time2 + " " + date2;
-          resp2.data[k]['val'] = math.round((resp2.data[k]['val'] / 1000 / 1000), 3);
-
-        }
-
-        ReverseHWForecastResult[promiseIndex2] = HWForecast.HWFunction(resp2.data, FCindex);
-        //console.log("ReverseHWForecastResult[j] : "+ReverseHWForecastResult[j]);
-        //console.log("resp1 " + promiseIndex + "= " + resp.data);
-        reverseFullDataList[promiseIndex2] = resp2.data;
-        //console.log("reverseFullDataList [" + promiseIndex2 + "]= " + reverseFullDataList[promiseIndex2]);
-        //console.log("reverseFullDataList = " + reverseFullDataList);
-        $scope.reverseFullDataList = reverseFullDataList;
-        promiseIndex2 = promiseIndex2 + 1;
-      });
     }
+    return $q.all(promises);
+  }).then(function (resp2) {
+    for (i = 0; i < resp2.length; i++) {
+
+      for (k = 0; k < resp2[i].data.length; k++) {
+        var date1 = UnixTimeConverterService.getDate(resp2[i].data[k]['ts']);
+        var date2 = date1[1] + " " + date1[0] + " " + date1[2];
+        var time1 = UnixTimeConverterService.getTime(resp2[i].data[k]['ts']);
+        var time2 = time1[0] + ":" + time1[1] + ":" + time1[2] + "" + time1[3];
+        resp2[i].data[k]['ts'] = time2 + " " + date2;
+        resp2[i].data[k]['val'] = math.round((resp2[i].data[k]['val'] / 1000 / 1000), 3);
+
+      }
+
+      ReverseHWForecastResult[i] = HWForecast.HWFunction(resp2[i].data, FCindex);
+      //console.log("ReverseHWForecastResult[j] : "+ReverseHWForecastResult[j]);
+      //console.log("resp1 " + promiseIndex + "= " + resp.data);
+      reverseFullDataList[i] = resp2[i].data;
+      //console.log("reverseFullDataList [" + promiseIndex2 + "]= " + reverseFullDataList[promiseIndex2]);
+      //console.log("reverseFullDataList = " + reverseFullDataList);
+      $scope.reverseFullDataList = reverseFullDataList;
+      //promiseIndex2 = promiseIndex2 + 1;
+
+    }
+
   }).then(function (resp) {
     var promiseIndex = 0; // helps to control the data in the promise
     //resp.data.length
     /*for (i = 0; i < resp.data.length; i++) {
-      var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/throughput/base?format=json";
-      //console.log(curURL);
+     var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/throughput/base?format=json";
+     //console.log(curURL);
 
-      // Problems: Request does not finish and assigned null values to array.
-      // Solution: Index in the response scope so that it get updated AFTER it gets data.
-      // Attempts to resolve then function exiting before completion.
-      $http.get(curURL).then(function (resp) {
-        //for (j = 0; j < resp.data.length; j++) {
-        for (j = 0; j < resp.data.length; j++) {
+     // Problems: Request does not finish and assigned null values to array.
+     // Solution: Index in the response scope so that it get updated AFTER it gets data.
+     // Attempts to resolve then function exiting before completion.
+     $http.get(curURL).then(function (resp) {
+     //for (j = 0; j < resp.data.length; j++) {
+     for (j = 0; j < resp.data.length; j++) {
 
-          var date1 = UnixTimeConverterService.getDate(resp.data[j]['ts']);
-          var date2 = date1[1] + " " + date1[0] + " " + date1[2];
-          var time1 = UnixTimeConverterService.getTime(resp.data[j]['ts']);
-          var time2 = time1[0] + ":" + time1[1] + ":" + time1[2] + "" + time1[3];
-          resp.data[j]['ts'] = time2 + " " + date2;
-          resp.data[j]['val'] = math.round((resp.data[j]['val'] / 1000 / 1000), 3);
+     var date1 = UnixTimeConverterService.getDate(resp.data[j]['ts']);
+     var date2 = date1[1] + " " + date1[0] + " " + date1[2];
+     var time1 = UnixTimeConverterService.getTime(resp.data[j]['ts']);
+     var time2 = time1[0] + ":" + time1[1] + ":" + time1[2] + "" + time1[3];
+     resp.data[j]['ts'] = time2 + " " + date2;
+     resp.data[j]['val'] = math.round((resp.data[j]['val'] / 1000 / 1000), 3);
 
-        }
-        //console.log("resp1 " + promiseIndex + "= " + resp.data);
-        fullDataList[promiseIndex] = resp.data;
-        //console.log("fulldataList " + promiseIndex + "= " + fullDataList[promiseIndex]);
-        //console.log("fulldataList = " + fullDataList);
-        $scope.fullDataList = fullDataList;
-        promiseIndex = promiseIndex + 1;
+     }
+     //console.log("resp1 " + promiseIndex + "= " + resp.data);
+     fullDataList[promiseIndex] = resp.data;
+     //console.log("fulldataList " + promiseIndex + "= " + fullDataList[promiseIndex]);
+     //console.log("fulldataList = " + fullDataList);
+     $scope.fullDataList = fullDataList;
+     promiseIndex = promiseIndex + 1;
 
-      });
-    }*/
+     });
+     }*/
 
 
     // Searching function
+    // It causes empty sets thus disabled.
     $scope.searchBW = function (wTimestart, wTimeend) {
       timestart = wTimestart;
       timeend = wTimeend;
@@ -314,11 +327,13 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
   $scope.source = source;
   $scope.destination = destination;
   $scope.HWForecastResult = HWForecastResult;
+  $scope.fullDataList = fullDataList;
 
   $scope.reverseCurrentMetakey = reverseCurrentMetakey;
   $scope.reverseSource = reverseSource;
   $scope.reverseDestination = reverseDestination;
   $scope.ReverseHWForecastResult = ReverseHWForecastResult;
+  $scope.reverseFullDataList = reverseFullDataList;
 
 }]);
 
