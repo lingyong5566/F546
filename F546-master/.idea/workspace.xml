@@ -23,26 +23,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LatencyCtrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Latency/LatencyCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7069">
-              <caret line="1474" column="14" selection-start-line="1474" selection-start-column="0" selection-end-line="1474" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DelayCtrl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Ping/DelayCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/F546-master/package.json">
           <provider selected="true" editor-type-id="text-editor">
@@ -86,13 +66,23 @@
       <file leaf-file-name="bandwidth.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/F546-master/src/bandwidth.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="173" column="60" selection-start-line="173" selection-start-column="60" selection-end-line="173" selection-end-column="60" />
+            <state relative-caret-position="187">
+              <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
               <folding>
                 <marker date="1481185185525" expanded="true" signature="6744:6750" ph="..." />
                 <marker date="1481185185525" expanded="true" signature="6822:7235" ph="..." />
                 <marker date="1481185185525" expanded="true" signature="8105:8479" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LineChart.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/services/LineChart.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -107,26 +97,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testing.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/F546-master/src/testing.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Bandwidth/test.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="IdeDocumentHistory">
@@ -136,7 +106,6 @@
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/HoltWinterForecast.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Latency/LatencyCtrl.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/chart.js" />
-        <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/LineChart.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/index.htm" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Traceroute/TracerouteLoadGraphCtrl.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Traceroute/TracerouteCtrl.js" />
@@ -150,6 +119,8 @@
         <option value="$PROJECT_DIR$/F546-master/src/testing.html" />
         <option value="$PROJECT_DIR$/F546-master/src/bandwidth.html" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Bandwidth/BandwidthCtrl.js" />
+        <option value="$PROJECT_DIR$/F546-master/.tmp/serve/bandwidth.html" />
+        <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/LineChart.js" />
       </list>
     </option>
   </component>
@@ -554,21 +525,21 @@
       <workItem from="1481114051195" duration="2847000" />
       <workItem from="1481128191501" duration="522000" />
       <workItem from="1481128999012" duration="3866000" />
-      <workItem from="1481167836916" duration="10754000" />
+      <workItem from="1481167836916" duration="10891000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149955000" />
+    <option name="totallyTimeSpent" value="150092000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1856" height="1088" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14393939" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14393939" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296371" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296371" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24945888" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="693" y="44" width="461" height="992" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -624,14 +595,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/F546-master/src/onewaydelay.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2635">
-          <caret line="155" column="7" selection-start-line="155" selection-start-column="7" selection-end-line="155" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Bandwidth/BandwidthCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3179">
@@ -806,7 +769,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/chart.js" />
-    <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/services/LineChart.js" />
     <entry file="file://$PROJECT_DIR$/F546-master/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5032">
@@ -988,10 +950,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/services/LineChart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/F546-master/.tmp/serve/bandwidth.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="112" selection-start-line="10" selection-start-column="112" selection-end-line="10" selection-end-column="112" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/F546-master/src/bandwidth.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="173" column="60" selection-start-line="173" selection-start-column="60" selection-end-line="173" selection-end-column="60" />
+        <state relative-caret-position="187">
+          <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
           <folding>
             <marker date="1481185185525" expanded="true" signature="6744:6750" ph="..." />
             <marker date="1481185185525" expanded="true" signature="6822:7235" ph="..." />

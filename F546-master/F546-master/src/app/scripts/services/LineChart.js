@@ -1,4 +1,4 @@
-angular.module('LineChart', []).directive('chart', function () {
+ngular.module('LineChart', []).directive('chart', function () {
     return {
         restrict:'E',
         template:'<div></div>',
