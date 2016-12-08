@@ -190,6 +190,8 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
       for(i = 0 ; i < fullDataList.length; i++){
         series[i] = fullDataList[i]["val"];
         series2[i] = HWForecastResult[i];
+      }
+      for(i = 0 ; i < reverseFullDataList.length; i++) {
         series3[i] = reverseFullDataList[i]["val"];
         series4[i] = ReverseHWForecastResult[i];
       }
