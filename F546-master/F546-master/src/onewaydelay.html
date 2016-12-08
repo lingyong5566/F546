@@ -153,14 +153,18 @@
     <th> Mode</th>
     <th> Variance</th>
     <th> Mean</th>
+    <th> Minimum</th>
+    <th> HWForecast</th>
   </tr>
-  <tr ng-repeat="x in fullDataList[fIndex]">
+  <tr ng-repeat="(xIndex,x) in fullDataList[fIndex]">
     <td>{{ x['val']['standard-deviation'] }}</td>
     <td>{{ x['val']['median'] }}</td>
     <td>{{ x['val']['maximum'] }}</td>
     <td>{{ x['val']['mode'] }}</td>
     <td>{{ x['val']['variance'] }}</td>
     <td>{{ x['val']['mean'] }}</td>
+    <td>{{ x['val']['minimum'] }}</td>
+    <td>{{HWForecastResult[fIndex][xIndex]}}</td>
   </tr>
 
 

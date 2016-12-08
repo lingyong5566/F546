@@ -10,7 +10,7 @@
   <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
   <script src="app/scripts/services/LineChart.js"></script>
-  <script src="app/scripts/highcharts.js"></script>-->
+  -->
 
   <!--<script-->
   <!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgSYT0qquQTzCZrnHL_Tkos7m1pSsA92A">-->
@@ -29,11 +29,12 @@
   <!-- css files will be automatically insert here -->
   <!-- endinject -->
   <!-- endbuild -->
-
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="http://cdn.zingchart.com/zingchart.min.js"></script>
+  <script src="http://cdn.zingchart.com/angular/zingchart-angularjs.js"></script>
 </head>
 
 <body>
-
 <!--<span id="firstController" ng-controller="LatencyGraphCtrl">
 <span id="secondController" ng-controller="LatencyInfoCtrl">
 <span id="thirdController" ng-controller="LatencyGraphPanelCtrl">
@@ -170,13 +171,14 @@
               <input name = "searchDate" value= "Search" type="button" ng-click=searchBW(cStartDate,cEndDate) />
               </div>
 
+    <th><zingchart id="myChart" zc-json="myJson" zc-height=700 zc-width=1200></zingchart></th>
 
-<div>
+</div>
 
   <table border = "1" ng-repeat="(fIndex,f) in currentMetakey">
   <tr >
     <th colspan = "2"><center>Metakey</center></th>
-    <th colspan = "2"><center>{{f}}</center></th>
+    <th colspan = "2"  ng-click=displayGraph(fullDataList[fIndex],HWForecastResult[fIndex],reverseFullDataList[fIndex],ReverseHWForecastResult[fIndex],source[$index],destination[$index])><center>{{f}}</center></th>
     <th colspan = "2"><center>ReverseMetakey</center></th>
     <th colspan = "2"><center>{{reverseCurrentMetakey[$index]}}</center></th>
   </tr>

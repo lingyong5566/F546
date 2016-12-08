@@ -1,7 +1,8 @@
 //var bandwidth = angular.module('bandwidth',[]);
-var bandwidth = angular.module('bandwidth', ['GeneralServices']);
-
+var bandwidth = angular.module('bandwidth', ['GeneralServices','zingchart-angularjs']);
 bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConverterService', 'HWForecast', function ($scope, $q, $http, UnixTimeConverterService, HWForecast) {
+
+
 
 
   var smallData = 0;
@@ -24,7 +25,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
 
   var timerange = 86400;
 
-  var FCindex = 0.5
+  var FCindex = 0.5;
 
   var mainUrl = "http://ps2.jp.apan.net/esmond/perfsonar/archive/?event-type=throughput&time-range=" + timerange;
 
@@ -63,9 +64,13 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
 
   }).then(function (response) {
     for (j = 0; j < response.length; j++) {
-      reverseCurrentMetakey[j] = response[j].data[0]['metadata-key'];
-      reverseSource[j] = response[j].data[0]['source'];
-      reverseDestination[j] = response[j].data[0]['destination'];
+      for (k = 0; k < response[j].data.length; k++) {
+        reverseCurrentMetakey[j] = response[j].data[k]['metadata-key'];
+        reverseSource[j] = response[j].data[k]['source'];
+        reverseDestination[j] = response[j].data[k]['destination'];
+
+      }
+
     }
   }).then(function (response) {
     var promises = [];
@@ -101,7 +106,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
         resp[i].data[j]['ts'] = time2 + " " + date2;
         resp[i].data[j]['val'] = math.round((resp[i].data[j]['val'] / 1000 / 1000), 3);
       }
-      HWForecastResult[i] = HWForecast.HWFunction(resp[i].data, FCindex);
+      HWForecastResult[i] = HWForecast.HWFunction(resp[i].data, FCindex,"bandwidth");
       //console.log("HWForecastResult["+promiseIndex+"] : "+HWForecastResult[promiseIndex]);
       //console.log("resp1 " + promiseIndex + "= " + resp.data);
       fullDataList[i] = resp[i].data;
@@ -131,7 +136,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
 
       }
 
-      ReverseHWForecastResult[i] = HWForecast.HWFunction(resp2[i].data, FCindex);
+      ReverseHWForecastResult[i] = HWForecast.HWFunction(resp2[i].data, FCindex,"bandwidth");
       //console.log("ReverseHWForecastResult[j] : "+ReverseHWForecastResult[j]);
       //console.log("resp1 " + promiseIndex + "= " + resp.data);
       reverseFullDataList[i] = resp2[i].data;
@@ -177,6 +182,33 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
 
     // Searching function
     // It causes empty sets thus disabled.
+    $scope.displayGraph = function (fullDataList,HWForecastResult,reverseFullDataList,ReverseHWForecastResult,source,destination) {
+      var series = [];
+      var series2 = [];
+      var series3 = [];
+      var series4 = [];
+      for(i = 0 ; i < fullDataList.length; i++){
+        series[i] = fullDataList[i]["val"];
+        series2[i] = HWForecastResult[i];
+        series3[i] = reverseFullDataList[i]["val"];
+        series4[i] = ReverseHWForecastResult[i];
+      }
+      console.log(fullDataList[1]["val"]);
+      $scope.myJson = {
+        type : 'line',
+        "legend":{
+
+        },
+        series : [
+          { values : series,"text":"Current"},
+          { values : series2,"text":"HWForecastResult"},
+          { values : series3,"text":"Reverse"},
+          { values : series4,"text":"ReverseHWForecastResult" }
+        ]
+      };
+      $location.hash('bottom');
+      $anchorScroll();
+    }
     $scope.searchBW = function (wTimestart, wTimeend) {
       timestart = wTimestart;
       timeend = wTimeend;
@@ -249,7 +281,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
               resp.data[j]['ts'] = time2 + " " + date2;
               resp.data[j]['val'] = math.round((resp.data[j]['val'] / 1000 / 1000), 3);
             }
-            HWForecastResult[promiseIndex] = HWForecast.HWFunction(resp.data, FCindex);
+            HWForecastResult[promiseIndex] = HWForecast.HWFunction(resp.data, FCindex,"bandwidth");
             //console.log("HWForecastResult[" + i + "] : " + HWForecastResult[i]);
             //console.log("resp1 " + promiseIndex + "= " + resp.data);
             fullDataList[promiseIndex] = resp.data;
@@ -292,7 +324,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q', '$http', 'UnixTimeConvert
 
             }
 
-            ReverseHWForecastResult[promiseIndex2] = HWForecast.HWFunction(resp2.data, FCindex);
+            ReverseHWForecastResult[promiseIndex2] = HWForecast.HWFunction(resp2.data, FCindex,"bandwidth");
             //console.log("ReverseHWForecastResult[j] : "+ReverseHWForecastResult[j]);
             //console.log("resp1 " + promiseIndex + "= " + resp.data);
             reverseFullDataList[promiseIndex2] = resp2.data;

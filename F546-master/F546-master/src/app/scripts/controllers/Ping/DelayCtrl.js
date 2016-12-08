@@ -1,18 +1,24 @@
 /*
  This Controller sets up OW Delay
  */
-var onewaydelay = angular.module('onewaydelay', []);
-var app = angular.module('onewaydelay', []);
+//var onewaydelay = angular.module('onewaydelay', []);
+var app = angular.module('onewaydelay', ['GeneralServices']);
 
-app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService', function ($scope, $q, $http, myService) {
+app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','HWForecast', function ($scope, $q, $http, myService,HWForecast) {
 
   // Do a loop, retrieve all metakeys involving owdelay and do a retrieve data for each metakey
+
   time = 3600;
   currentMetakey = [];
   source = [];
   destination = [];
   var fullDataList = [];
   $scope.fullDataList = [];
+
+  var HWForecastResult = [];
+
+  var FCindex = 0.5;
+
   timerange = 86400;
   var mainUrl = "http://ps2.jp.apan.net/esmond/perfsonar/archive/?event-type=histogram-owdelay&time-range=" + timerange;
   $http.get(mainUrl)
@@ -33,7 +39,8 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService', function ($sc
       //var deferred = $q.defer();
 
       //console.log(currentMetakey[i]);
-      var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/histogram-owdelay/statistics/3600";
+      var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/histogram-owdelay/statistics/"+time+"?time-range="+timerange;
+
       console.log(curURL);
       //console.log(myService.getData(curURL));
 
@@ -63,7 +70,9 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService', function ($sc
         resp[i].data[j]['val']['variance'] = math.round(resp[i].data[j]['val']['variance'], 3);
         resp[i].data[j]['val']['mean'] = math.round(resp[i].data[j]['val']['mean'], 3);
 
+
       }
+      HWForecastResult[i] = HWForecast.HWFunction(resp[i].data, FCindex,"delay");
       //console.log("resp1 " + promiseIndex + "= " + resp.data);
       fullDataList[i] = resp[i].data;
       //console.log("fulldataList " + promiseIndex + "= " + fullDataList[promiseIndex]);
@@ -75,10 +84,13 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService', function ($sc
       console.log("[0] = " + fullDataList[1]);
       //console.log("whole = " + fullDataList);
     }
+
+
     $scope.currentMetakey = currentMetakey;
     $scope.source = source;
     $scope.destination = destination;
     $scope.fullDataList = fullDataList;
+    $scope.HWForecastResult = HWForecastResult;
 
 
   });

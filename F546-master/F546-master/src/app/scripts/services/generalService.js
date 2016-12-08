@@ -25,14 +25,28 @@ generalServices.factory('IPAddressIdentifierService', function () {
 
 generalServices.service('HWForecast', function() {
 
-  this.HWFunction = function(respObj, alpha)
+  this.HWFunction = function(respObj, alpha, action)
   {
     //console.log("HWForecasting");
 
-    var series = []
-    for (j = 0; j < respObj.length; j++) {
-        series[j] = respObj[j]['val'];
+    var series = [];
+    if(action == "delay")
+    {
+      console.log("In delay");
+      for (j = 0; j < respObj.length; j++) {
+        //series[j] = respObj[j]['val'];
+        series[j] = respObj[j]['val']['minimum'];
+      }
     }
+    if(action == "bandwidth")
+    {
+      console.log("In bandwidth");
+      for (j = 0; j < respObj.length; j++) {
+        series[j] = respObj[j]['val'];
+        //series[j] = respObj[j]['val']['minimum'];
+      }
+    }
+
     //console.log("series = "+series);
     //console.log("series[0] = "+series[0]);
     //console.log("alpha = "+alpha);
@@ -45,12 +59,8 @@ generalServices.service('HWForecast', function() {
   };
 })
 
-
-
 // NOTE THAT THIS IS A SERVICE
 generalServices.service('UnixTimeConverterService', function () {
-
-
 
   this.getDate = function (timestamp) {
     var fullMonth = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
