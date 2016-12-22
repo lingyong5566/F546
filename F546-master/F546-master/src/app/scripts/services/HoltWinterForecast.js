@@ -7,7 +7,7 @@ HWForecast.controller('HWForecastCtrl', ['$scope', function ($scope) {
     var result = [series[0]];
     var n;
     for (n = 1; n<series.length;n++){
-      result.append(alpha * series[n] + (1-alpha)*result[n-1]);
+      result.append(math.round((alpha * series[n] + (1-alpha)*result[n-1]),3));
     }
     return result;
   };

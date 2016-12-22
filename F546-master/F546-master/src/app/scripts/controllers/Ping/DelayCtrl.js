@@ -2,9 +2,9 @@
  This Controller sets up OW Delay
  */
 //var onewaydelay = angular.module('onewaydelay', []);
-var app = angular.module('onewaydelay', ['GeneralServices']);
+var app = angular.module('onewaydelay', ['GeneralServices','zingchart-angularjs']);
 
-app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','HWForecast', function ($scope, $q, $http, myService,HWForecast) {
+app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConverterService', 'HWForecast', function ($scope, $q, $http, myService,UnixTimeConverterService, HWForecast) {
 
   // Do a loop, retrieve all metakeys involving owdelay and do a retrieve data for each metakey
 
@@ -12,47 +12,41 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','HWForecast', 
   currentMetakey = [];
   source = [];
   destination = [];
+
   var fullDataList = [];
-  $scope.fullDataList = [];
-
   var HWForecastResult = [];
-
   var FCindex = 0.5;
 
-  timerange = 86400;
-  var mainUrl = "http://ps2.jp.apan.net/esmond/perfsonar/archive/?event-type=histogram-owdelay&time-range=" + timerange;
-  $http.get(mainUrl)
-    .then(function (response) {
-        //console.log(response.data.length); // 44 entries
-        //for(i = 0;i<response.data.length;i++)
+  reverseCurrentMetakey = [];
+  reverseSource = [];
+  reverseDestination = [];
+  var reverseFullDataList = [];
 
-        for (i = 0; i < response.data.length; i++) {
-          currentMetakey[i] = response.data[i]['metadata-key'];
-          source[i] = response.data[i]['input-source'];
-          destination[i] = response.data[i]['input-destination'];
-        }
+  var reverseHWForecastResult = [];
+
+  timerange = 86400;
+
+  packetLoss = [];
+  reversePacketLoss = [];
+  var mainUrl = "http://ps2.jp.apan.net/esmond/perfsonar/archive/?event-type=histogram-owdelay&time-range=" + timerange;
+  $http.get(mainUrl).then(function (response) {
+      for (i = 0; i < response.data.length; i++) {
+        currentMetakey[i] = response.data[i]['metadata-key'];
+        source[i] = response.data[i]['source'];
+        destination[i] = response.data[i]['destination'];
       }
-    ).then(function (resp) {
+    }
+  ).then(function (resp) {
     var promises = [];
     for (i = 0; i < currentMetakey.length; i++) {
-
-      //var deferred = $q.defer();
-
-      //console.log(currentMetakey[i]);
-      var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/histogram-owdelay/statistics/"+time+"?time-range="+timerange;
+      var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/histogram-owdelay/statistics/" + time + "?time-range=" + timerange;
 
       console.log(curURL);
-      //console.log(myService.getData(curURL));
 
-      promises.push($http.get(curURL));
       // Problems: Request does not finish and assigned null values to array.
       // Solution: Index in the response scope so that it get updated AFTER it gets data.
       // Attempts to resolve then function exiting before completion.
-
-      /*myService.getData(curURL).then(
-       function (resp) {
-
-       )*/
+      promises.push($http.get(curURL));
     }
 
     //$scope.fullData = response.data;
@@ -60,7 +54,7 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','HWForecast', 
     return $q.all(promises);
 
   }).then(function (resp) {
-    console.log("resp.length = "+resp.length);
+    var promises = [];
     for (i = 0; i < resp.length; i++) {
       for (j = 0; j < resp[i].data.length; j++) {
         //console.log("hey3");
@@ -72,17 +66,18 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','HWForecast', 
 
 
       }
-      HWForecastResult[i] = HWForecast.HWFunction(resp[i].data, FCindex,"delay");
+      HWForecastResult[i] = HWForecast.HWFunction(resp[i].data, FCindex, "delay");
       //console.log("resp1 " + promiseIndex + "= " + resp.data);
       fullDataList[i] = resp[i].data;
       //console.log("fulldataList " + promiseIndex + "= " + fullDataList[promiseIndex]);
       //console.log("fulldataList = " + fullDataList);
       //promiseIndex = promiseIndex + 1;
-
-
-      //console.log("scope = " + $scope.fullDataList);
-      console.log("[0] = " + fullDataList[1]);
-      //console.log("whole = " + fullDataList);
+    }
+    for (i = 0; i < currentMetakey.length; i++) {
+      var urlReverseTraffic = "http://ps2.jp.apan.net/esmond/perfsonar/archive/?event-type=histogram-owdelay&source=" + destination[i] + "&destination=" + source[i] + "&time-range=" + timerange;// Get reverse metakey.
+      // + "&format=json"
+      console.log("urlReverseTraffic : " + urlReverseTraffic);
+      promises.push($http.get(urlReverseTraffic));
     }
 
 
@@ -92,8 +87,188 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','HWForecast', 
     $scope.fullDataList = fullDataList;
     $scope.HWForecastResult = HWForecastResult;
 
+    return $q.all(promises);
+
+
+  }).then(function (response) {
+    for (j = 0; j < response.length; j++) {
+      for (k = 0; k < response[j].data.length; k++) {
+        reverseCurrentMetakey[j] = response[j].data[k]['metadata-key'];
+        reverseSource[j] = response[j].data[k]['source'];
+        reverseDestination[j] = response[j].data[k]['destination'];
+
+      }
+
+    }
+
+
+    var promises = [];
+
+    for (i = 0; i < reverseCurrentMetakey.length; i++) {
+      var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + reverseCurrentMetakey[i] + "/histogram-owdelay/statistics/" + time + "?time-range=" + timerange;
+      console.log("urlReverseTrafficSub = " + curURL);
+      promises.push($http.get(curURL));
+    }
+
+
+
+
+    $scope.reverseCurrentMetakey = reverseCurrentMetakey;
+    $scope.reverseSource = reverseSource;
+    $scope.reverseDestination = reverseDestination;
+
+    return $q.all(promises);
+
+
+  }).then(function(response){
+
+    var promises = [];
+
+    for (i = 0; i < response.length; i++) {
+      for (j = 0; j < response[i].data.length; j++) {
+        //console.log("hey3");
+        //console.log(response1.data[j]['val']['standard-deviation']); OK
+        //console.log(math.round(resp[i].data[j]['val']['standard-deviation']),3);
+        response[i].data[j]['val']['standard-deviation'] = math.round(response[i].data[j]['val']['standard-deviation'], 3);
+        response[i].data[j]['val']['variance'] = math.round(response[i].data[j]['val']['variance'], 3);
+        response[i].data[j]['val']['mean'] = math.round(response[i].data[j]['val']['mean'], 3);
+
+
+      }
+      reverseHWForecastResult[i] = HWForecast.HWFunction(response[i].data, FCindex, "delay");
+      //console.log("resp1 " + promiseIndex + "= " + resp.data);
+      reverseFullDataList[i] = response[i].data;
+      //console.log("fulldataList " + promiseIndex + "= " + fullDataList[promiseIndex]);
+      //console.log("fulldataList = " + fullDataList);
+      //promiseIndex = promiseIndex + 1;
+
+
+      //console.log("scope = " + $scope.fullDataList);
+      console.log("[0] = " + reverseFullDataList[1]);
+      //console.log("whole = " + fullDataList);
+
+      $scope.reverseFullDataList = reverseFullDataList;
+      $scope.reverseHWForecastResult = reverseHWForecastResult;
+    }
+
+
+  }).then(function(resp){
+    var promises = [];
+    for (i = 0; i < currentMetakey.length; i++) {
+      var packetLossURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/packet-loss-rate/aggregations/" + time + "?time-range=" + timerange;
+      console.log("packetLossURL = " + packetLossURL);
+      promises.push($http.get(packetLossURL));
+    }
+    return $q.all(promises);
+
+
+  }).then(function(response){
+
+    var packetLoss = [];
+    for (i = 0; i < response.length; i++) {
+      for (j = 0; j < response[i].data.length; j++) {
+
+        var date1 = UnixTimeConverterService.getDate(response[i].data[j]['ts']);
+        var date2 = date1[1] + " " + date1[0] + " " + date1[2];
+        var time1 = UnixTimeConverterService.getTime(response[i].data[j]['ts']);
+        var time2 = time1[0] + ":" + time1[1] + ":" + time1[2] + "" + time1[3];
+
+        response[i].data[j]['ts'] = time2 + " " + date2;
+
+        response[i].data[j]['val'] = math.round((response[i].data[j]['val'] ), 5);
+        //console.log(response[i].data[j]);
+
+
+      }
+      packetLoss[i] = response[i].data
+    }
+
+
+    $scope.packetLoss = packetLoss;
+
+    var promises = [];
+    for (i = 0; i < reverseCurrentMetakey.length; i++) {
+      var reversePacketLossURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + reverseCurrentMetakey[i] + "/packet-loss-rate/aggregations/" + time + "?time-range=" + timerange;
+      console.log("reversePacketLossURL = " + reversePacketLossURL);
+      promises.push($http.get(reversePacketLossURL));
+    }
+    return $q.all(promises);
+
+
+
+  }).then(function(response){
+
+    var reversePacketLoss = [];
+    for (i = 0; i < response.length; i++) {
+      for (j = 0; j < response[i].data.length; j++) {
+
+        var date1 = UnixTimeConverterService.getDate(response[i].data[j]['ts']);
+        var date2 = date1[1] + " " + date1[0] + " " + date1[2];
+        var time1 = UnixTimeConverterService.getTime(response[i].data[j]['ts']);
+        var time2 = time1[0] + ":" + time1[1] + ":" + time1[2] + "" + time1[3];
+
+        response[i].data[j]['ts'] = time2 + " " + date2;
+
+        response[i].data[j]['val'] = math.round((response[i].data[j]['val'] ), 5);
+        console.log(response[i].data[j]);
+
+
+      }
+      reversePacketLoss[i] = response[i].data
+    }
+
+
+    $scope.reversePacketLoss = reversePacketLoss;
 
   });
+
+  $scope.displayGraph = function (fullDataList,HWForecastResult,reverseFullDataList,ReverseHWForecastResult,source,destination) {
+    //,HWForecastResult2,HWForecastResult3,HWForecastResult4,ReverseHWForecastResult2,ReverseHWForecastResult3,ReverseHWForecastResult4
+    //,HWForecastResult2[fIndex],HWForecastResult3[fIndex],HWForecastResult4[fIndex],ReverseHWForecastResult2[fIndex],ReverseHWForecastResult3[fIndex],ReverseHWForecastResult4[fIndex]
+    var series = [];
+    var series2 = [];
+    var series3 = [];
+    var series4 = [];
+    var rangeSeries1 = [];
+    var rangeSeries2 = [];
+    var RrangeSeries1 = [];
+    var RrangeSeries2 = [];
+    for(i = 0 ; i < fullDataList.length; i++){
+      series[i] = fullDataList[i]["val"]['minimum'];
+      series2[i] = HWForecastResult[i];
+      //rangeSeries1[i] = [HWForecastResult[i],HWForecastResult3[i]];
+      //rangeSeries2[i] = [HWForecastResult2[i],HWForecastResult4[i]];
+    }
+    for(i = 0 ; i < reverseFullDataList.length; i++) {
+      series3[i] = reverseFullDataList[i]["val"]['minimum'];
+      series4[i] = ReverseHWForecastResult[i];
+      //RrangeSeries1[i] = [ReverseHWForecastResult[i],ReverseHWForecastResult3[i]];
+      //RrangeSeries2[i] = [ReverseHWForecastResult2[i],ReverseHWForecastResult4[i]];
+    }
+    console.log(fullDataList[1]["val"]);
+    $scope.myJson = {
+      type : 'mixed',
+      "legend":{
+
+      },
+      series : [
+        { values : series,"text":"Current Minimum"},
+        { values : series2,"text":"HWForecastResult"},
+        { values : series3,"text":"Reverse Minimum"},
+        { values : series4,"text":"ReverseHWForecastResult"},
+        //{  "type": "range",plot:{ marker:{ size: 0, borderColor: "black",borderWidth: 0 }},"values": rangeSeries1,"color":"transparent", "alpha-area":0.1, "text":"HWForecastResult 10%"},
+        //{  "type": "range",plot:{ marker:{ size: 0, borderColor: "black",borderWidth: 0 }},"values": rangeSeries2,"color":"transparent", "alpha-area":0.1, "text":"HWForecastResult 15%"},
+
+        //{  "type": "range",plot:{ marker:{ size: 0, borderColor: "black",borderWidth: 0 }}, "values": RrangeSeries1, "alpha-area":0.1,"text":"ReverseHWForecastResult 10%"},
+        //{  "type": "range",plot:{ marker:{ size: 0, borderColor: "black",borderWidth: 0 }}, "values": RrangeSeries2, "alpha-area":0.1,"text":"ReverseHWForecastResult 15%"}
+      ]
+    };
+  }
+
+
+  /*.then(function(response){
+
+   })*/
 
 
   // Custom metakey for data

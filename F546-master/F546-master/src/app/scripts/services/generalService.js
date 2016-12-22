@@ -32,7 +32,7 @@ generalServices.service('HWForecast', function() {
     var series = [];
     if(action == "delay")
     {
-      console.log("In delay");
+      //console.log("In delay");
       for (j = 0; j < respObj.length; j++) {
         //series[j] = respObj[j]['val'];
         series[j] = respObj[j]['val']['minimum'];
@@ -40,7 +40,7 @@ generalServices.service('HWForecast', function() {
     }
     if(action == "bandwidth")
     {
-      console.log("In bandwidth");
+      //console.log("In bandwidth");
       for (j = 0; j < respObj.length; j++) {
         series[j] = respObj[j]['val'];
         //series[j] = respObj[j]['val']['minimum'];
@@ -53,7 +53,7 @@ generalServices.service('HWForecast', function() {
     var result = [series[0]];
     var n;
     for (n = 1; n<series.length;n++){
-      result.push(alpha * series[n] + (1-alpha)*result[n-1]);
+      result.push(math.round(alpha * series[n] + (1-alpha)*result[n-1],3));
     }
     return result;
   };
