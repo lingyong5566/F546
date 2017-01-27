@@ -9,13 +9,21 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
   // Do a loop, retrieve all metakeys involving owdelay and do a retrieve data for each metakey
 
   time = 3600;
+  baseURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/";
   currentMetakey = [];
   source = [];
   destination = [];
+  criticalValue = 0.8;
+  warningValue = 0.6;
+  minorValue = 0.2;
+
 
   var fullDataList = [];
   var HWForecastResult = [];
   var FCindex = 0.5;
+  var errorInformation1 = [];
+  var errorInformation2 = [];
+  var errorInformation3 = [];
 
   reverseCurrentMetakey = [];
   reverseSource = [];
@@ -25,6 +33,8 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
   var reverseHWForecastResult = [];
 
   timerange = 86400;
+
+  var mostRecentTime = 300;
 
   packetLoss = [];
   reversePacketLoss = [];
@@ -220,6 +230,49 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
 
     $scope.reversePacketLoss = reversePacketLoss;
 
+  }).then(function(response){
+    var promises = [];
+    for (i = 0; i < currentMetakey.length; i++) {
+      var mostRecentURL = baseURL + currentMetakey[i] + "/packet-loss-rate/aggregations/" + mostRecentTime + "?time-range=" + mostRecentTime;
+      console.log("mostRecentURL = " + mostRecentURL);
+      promises.push($http.get(mostRecentURL));
+    }
+    return $q.all(promises);
+  }).then(function(response){
+    for (i = 0; i < response.length; i++) {
+      for (j = 0; j < response[i].data.length; j++) {
+
+        if(i == 1){
+          response[i].data[j]['val'] = 0.2;
+        }
+        if(i == 2){
+          response[i].data[j]['val'] = 0.6;
+        }
+        if(i == 3){
+          response[i].data[j]['val'] = 0.8;
+        }
+        console.log("parseFloat(response[i].data[j]['val'])"+parseFloat(response[i].data[j]['val']));
+        if(parseFloat(response[i].data[j]['val']) >= criticalValue){
+          var pairValue = [currentMetakey[i],math.round((response[i].data[j]['val'] ), 5)];
+          errorInformation1.push(pairValue);
+        }
+        else if(parseFloat(response[i].data[j]['val']) >= warningValue){
+          var pairValue = [currentMetakey[i],math.round((response[i].data[j]['val'] ), 5)];
+          errorInformation2.push(pairValue);
+        }
+        else if(parseFloat(response[i].data[j]['val']) >= minorValue){
+          var pairValue = [currentMetakey[i],math.round((response[i].data[j]['val'] ), 5)];
+          errorInformation3.push(pairValue);
+        }
+
+      }
+  }
+    $scope.errorInformation1 = errorInformation1;
+    $scope.errorInformation2 = errorInformation2;
+    $scope.errorInformation3 = errorInformation3;
+    console.log("errorInformation1 : "+errorInformation1);
+    console.log("errorInformation2 : "+errorInformation2);
+    console.log("errorInformation3 : "+errorInformation3);
   });
 
   $scope.displayGraph = function (fullDataList,HWForecastResult,reverseFullDataList,ReverseHWForecastResult,source,destination) {

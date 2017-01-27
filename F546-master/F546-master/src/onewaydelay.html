@@ -279,6 +279,7 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
+
           <div>
             <!--<div id="latency_graph_cytoscape"></div> -->
 
@@ -365,8 +366,31 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <!--<i class="fa fa-gear fa-fw"></i> Graph Panel
-        </div> -->
+
+          <i>Error Information</i>
+
+          <div ng-repeat="(fIndex,f) in errorInformation1"> Critical
+            <ul>
+              <li>Metakey : {{f[0]}}</li>
+              <li>Packet Loss Info : {{f[1]}}</li>
+            </ul>
+
+          </div>
+          <div ng-repeat="(fIndex,f) in errorInformation2"> Warning
+            <ul>
+              <li>Metakey : {{f[0]}}</li>
+              <li>Packet Loss Info : {{f[1]}}</li>
+            </ul>
+
+          </div>
+          <div ng-repeat="(fIndex,f) in errorInformation3"> Minor
+            <ul>
+              <li>Metakey : {{f[0]}}</li>
+              <li>Packet Loss Info : {{f[1]}}</li>
+            </ul>
+
+          </div>
+        </div>
         <!-- /.panel-heading -->
 
 
