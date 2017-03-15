@@ -2,21 +2,30 @@
  This Controller sets up OW Delay
  */
 //var onewaydelay = angular.module('onewaydelay', []);
-var app = angular.module('onewaydelay', ['GeneralServices','zingchart-angularjs']);
+var app = angular.module('onewaydelay',['GeneralServices','zingchart-angularjs' ]);
 
-app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConverterService', 'HWForecast', function ($scope, $q, $http, myService,UnixTimeConverterService, HWForecast) {
+app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTimeConverterService', 'HWForecast', function ($scope, $q, $http, $log,myService,UnixTimeConverterService, HWForecast) {
 
   // Do a loop, retrieve all metakeys involving owdelay and do a retrieve data for each metakey
 
   time = 3600;
-  baseURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/";
+  baseURL = "http://perfsonar-gs.singaren.net.sg/esmond/perfsonar/archive/";
   currentMetakey = [];
   source = [];
   destination = [];
+  sdns = [];
+  ddns =[];
+  rsdns = [];
+  rddns =[];
   criticalValue = 0.8;
   warningValue = 0.6;
   minorValue = 0.2;
 
+
+  var host = "http://203.30.39.133/reversednslookup";
+  var host2 = "http://geoip.nekudo.com/api/";
+
+  testcode = false;
 
   var fullDataList = [];
   var HWForecastResult = [];
@@ -33,23 +42,29 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
   var reverseHWForecastResult = [];
 
   timerange = 86400;
-
-  var mostRecentTime = 300;
+  timerange = 3600*24;
+  var mostRecentTime = 3600;
 
   packetLoss = [];
   reversePacketLoss = [];
-  var mainUrl = "http://ps2.jp.apan.net/esmond/perfsonar/archive/?event-type=histogram-owdelay&time-range=" + timerange;
+  var mainUrl = baseURL+"?event-type=histogram-owdelay&time-range=" + timerange;
+  console.log(mainUrl);
+
   $http.get(mainUrl).then(function (response) {
+    var promises = [];
       for (i = 0; i < response.data.length; i++) {
         currentMetakey[i] = response.data[i]['metadata-key'];
         source[i] = response.data[i]['source'];
         destination[i] = response.data[i]['destination'];
+        sdns[i] = response.data[i]['input-source'];
+        ddns[i] = response.data[i]['input-destination'];
       }
     }
-  ).then(function (resp) {
+  ).then(function (response) {
     var promises = [];
+
     for (i = 0; i < currentMetakey.length; i++) {
-      var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/histogram-owdelay/statistics/" + time + "?time-range=" + timerange;
+      var curURL = baseURL + currentMetakey[i] + "/histogram-owdelay/statistics/" + time + "?time-range=" + timerange;
 
       console.log(curURL);
 
@@ -58,6 +73,8 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
       // Attempts to resolve then function exiting before completion.
       promises.push($http.get(curURL));
     }
+
+
 
     //$scope.fullData = response.data;
 
@@ -84,7 +101,7 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
       //promiseIndex = promiseIndex + 1;
     }
     for (i = 0; i < currentMetakey.length; i++) {
-      var urlReverseTraffic = "http://ps2.jp.apan.net/esmond/perfsonar/archive/?event-type=histogram-owdelay&source=" + destination[i] + "&destination=" + source[i] + "&time-range=" + timerange;// Get reverse metakey.
+      var urlReverseTraffic = baseURL+"?event-type=histogram-owdelay&source=" + destination[i] + "&destination=" + source[i] + "&time-range=" + timerange;// Get reverse metakey.
       // + "&format=json"
       console.log("urlReverseTraffic : " + urlReverseTraffic);
       promises.push($http.get(urlReverseTraffic));
@@ -96,6 +113,10 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
     $scope.destination = destination;
     $scope.fullDataList = fullDataList;
     $scope.HWForecastResult = HWForecastResult;
+    console.log("sdns : " + sdns);
+    console.log("ddns : " + ddns);
+    $scope.sdns = sdns;
+    $scope.ddns = ddns;
 
     return $q.all(promises);
 
@@ -106,7 +127,8 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
         reverseCurrentMetakey[j] = response[j].data[k]['metadata-key'];
         reverseSource[j] = response[j].data[k]['source'];
         reverseDestination[j] = response[j].data[k]['destination'];
-
+        rsdns[j] = response[j].data[k]['input-source'];
+        rddns[j] = response[j].data[k]['input-destination']
       }
 
     }
@@ -115,7 +137,7 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
     var promises = [];
 
     for (i = 0; i < reverseCurrentMetakey.length; i++) {
-      var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + reverseCurrentMetakey[i] + "/histogram-owdelay/statistics/" + time + "?time-range=" + timerange;
+      var curURL = baseURL + reverseCurrentMetakey[i] + "/histogram-owdelay/statistics/" + time + "?time-range=" + timerange;
       console.log("urlReverseTrafficSub = " + curURL);
       promises.push($http.get(curURL));
     }
@@ -126,7 +148,8 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
     $scope.reverseCurrentMetakey = reverseCurrentMetakey;
     $scope.reverseSource = reverseSource;
     $scope.reverseDestination = reverseDestination;
-
+    $scope.rsdns = rsdns;
+    $scope.rddns = rddns;
     return $q.all(promises);
 
 
@@ -165,7 +188,7 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
   }).then(function(resp){
     var promises = [];
     for (i = 0; i < currentMetakey.length; i++) {
-      var packetLossURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/packet-loss-rate/aggregations/" + time + "?time-range=" + timerange;
+      var packetLossURL = baseURL + currentMetakey[i] + "/packet-loss-rate/aggregations/" + time + "?time-range=" + timerange;
       console.log("packetLossURL = " + packetLossURL);
       promises.push($http.get(packetLossURL));
     }
@@ -198,7 +221,7 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
 
     var promises = [];
     for (i = 0; i < reverseCurrentMetakey.length; i++) {
-      var reversePacketLossURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + reverseCurrentMetakey[i] + "/packet-loss-rate/aggregations/" + time + "?time-range=" + timerange;
+      var reversePacketLossURL = baseURL + reverseCurrentMetakey[i] + "/packet-loss-rate/aggregations/" + time + "?time-range=" + timerange;
       console.log("reversePacketLossURL = " + reversePacketLossURL);
       promises.push($http.get(reversePacketLossURL));
     }
@@ -233,24 +256,29 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
   }).then(function(response){
     var promises = [];
     for (i = 0; i < currentMetakey.length; i++) {
-      var mostRecentURL = baseURL + currentMetakey[i] + "/packet-loss-rate/aggregations/" + mostRecentTime + "?time-range=" + mostRecentTime;
+      var mostRecentURL = baseURL + currentMetakey[i] + "/packet-loss-rate/aggregations/" + "3600" + "?time-range=" + mostRecentTime;
       console.log("mostRecentURL = " + mostRecentURL);
       promises.push($http.get(mostRecentURL));
     }
     return $q.all(promises);
   }).then(function(response){
+    var promises = [];
     for (i = 0; i < response.length; i++) {
       for (j = 0; j < response[i].data.length; j++) {
 
-        if(i == 1){
-          response[i].data[j]['val'] = 0.2;
+        if(testcode == true)
+        {
+          if(i == 1 && j == 0){
+            response[i].data[j]['val'] = 0.2;
+          }
+          if(i == 2 && j == 0){
+            response[i].data[j]['val'] = 0.6;
+          }
+          if(i == 3 && j == 0){
+            response[i].data[j]['val'] = 0.8;
+          }
         }
-        if(i == 2){
-          response[i].data[j]['val'] = 0.6;
-        }
-        if(i == 3){
-          response[i].data[j]['val'] = 0.8;
-        }
+
         console.log("parseFloat(response[i].data[j]['val'])"+parseFloat(response[i].data[j]['val']));
         if(parseFloat(response[i].data[j]['val']) >= criticalValue){
           var pairValue = [currentMetakey[i],math.round((response[i].data[j]['val'] ), 5)];
@@ -267,14 +295,100 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", 'myService','UnixTimeConve
 
       }
   }
+  /*
+    for(i = 0 ; i < 1; i++) {
+
+      var sURL = host2 + source[i] +"/";
+      var dURL = host2 + destination[i]+"/";
+      promises.push(GeoIPNekudoService.getCountry(source[i]));
+      //promises.push($http.get(dURL));
+    }
+*/
     $scope.errorInformation1 = errorInformation1;
     $scope.errorInformation2 = errorInformation2;
     $scope.errorInformation3 = errorInformation3;
+
+
     console.log("errorInformation1 : "+errorInformation1);
     console.log("errorInformation2 : "+errorInformation2);
     console.log("errorInformation3 : "+errorInformation3);
+    return $q.all(promises);
+
   });
 
+  /*
+   .then(function(response){
+   console.log(response.length);
+   console.log("XX "+response.data);
+   for(i = 0 ; i < response.length; i++)
+   {
+   console.log("XX "+response.data);
+   }
+   j = 0;
+   k = 0;
+   for(i = 0 ; i < source.length; i++)
+   {
+   var sURL = host2 + source[i];
+   var dURL = host2 + destination[i];
+
+
+   $http.get(sURL).then(function (response)
+   {
+   try{
+   console.log("ZZ "+response.data['country']['name']+" "+console.log(sURL));
+   sdns[j] = "Unknown";
+   sdns[j] = response.data['country']['name'];
+   if(sdns[j] == 'undefined')
+   {
+   console.log("YY ");
+   sdns[j] = "Unknown";
+   }
+   console.log("XX ");
+   console.log("Number "+j+" sDNS = "+ddns[j]);
+   j++;
+   }
+   catch (err){
+   console.log("error");
+   sdns[j] = "Unknown";
+   j++;
+   }
+
+   });
+   $http.get(dURL).then(function (response)
+   {
+   try{
+
+   ddns[k] = response.data['country']['name'];
+   if(response.data['type'] == "error")
+   {
+   ddns[k] = "Unknown";
+   }
+   console.log("Number "+k+" DDNS = "+ddns[k]);
+   k++;
+   }
+   catch (err){
+   ddns[k] = "Unknown";
+   k++;
+   }
+
+   });
+   }
+   /*
+   console.log("source.length = "+source.length);
+   for (i = 0; i < response.length; i = i+2) {
+   console.log(response.data);
+   try{
+   sdns[i] = response.data[i]['country']['name'];
+   ddns[i] = response.data[i+1]['country']['name'];
+   }
+   catch (err){
+   sdns[i] = "Unknown";
+   ddns[i] = "Unknown";
+   }
+
+   }
+})
+   */
   $scope.displayGraph = function (fullDataList,HWForecastResult,reverseFullDataList,ReverseHWForecastResult,source,destination) {
     //,HWForecastResult2,HWForecastResult3,HWForecastResult4,ReverseHWForecastResult2,ReverseHWForecastResult3,ReverseHWForecastResult4
     //,HWForecastResult2[fIndex],HWForecastResult3[fIndex],HWForecastResult4[fIndex],ReverseHWForecastResult2[fIndex],ReverseHWForecastResult3[fIndex],ReverseHWForecastResult4[fIndex]
@@ -361,3 +475,6 @@ app.factory('myService', function ($http) {
 
   return {getData: getData};
 });
+
+
+

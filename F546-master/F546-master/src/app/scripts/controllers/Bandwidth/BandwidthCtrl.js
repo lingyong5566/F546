@@ -17,7 +17,10 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
   var HWForecastResult2 = [];
   var HWForecastResult3 = [];
   var HWForecastResult4 = [];
-
+  sdns = [];
+  ddns =[];
+  rsdns = [];
+  rddns =[];
   // Reverse Traffic variables.
   reverseCurrentMetakey = [];
   reverseSource = [];
@@ -30,14 +33,14 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
   var promiseIndex1 = 0;
 
   var timerange = 86400;
-
+  timerange = 86400;
   var FCindex = 0.9;
   var FCindex2 = 0.85;
 
   var FCindex3 = 1.1;
   var FCindex4 = 1.15;
-
-  var mainUrl = "http://ps2.jp.apan.net/esmond/perfsonar/archive/?event-type=throughput&time-range=" + timerange;
+  var main = "http://perfsonar-gs.singaren.net.sg/esmond/perfsonar/archive/";
+  var mainUrl = main+"?event-type=throughput&time-range=" + timerange;
 
   respLength = 0;
 
@@ -47,7 +50,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
     var nodeList;
 
   }
-
+  console.log("mainUrl : " + mainUrl);
   $http.get(mainUrl)
     .then(function (response) {
         respLength = response.data.length;
@@ -57,13 +60,15 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
           currentMetakey[i] = response.data[i]['metadata-key'];
           source[i] = response.data[i]['source'];
           destination[i] = response.data[i]['destination'];
+          sdns[j] = response.data[i]['input-source'];
+          ddns[j] = response.data[k]['input-destination'];
         }
       }
     ).then(function (r2) {
     var promises = [];
     for (l = 0; l < currentMetakey.length; l++) {
 
-      var urlReverseTraffic = "http://ps2.jp.apan.net/esmond/perfsonar/archive/?event-type=throughput&source=" + destination[l] + "&destination=" + source[l] + "&time-range=" + timerange;// Get reverse metakey.
+      var urlReverseTraffic = main+"?event-type=throughput&source=" + destination[l] + "&destination=" + source[l] + "&time-range=" + timerange;// Get reverse metakey.
       // + "&format=json"
       console.log("urlReverseTraffic : " + urlReverseTraffic);
       promises.push($http.get(urlReverseTraffic));
@@ -78,7 +83,8 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
         reverseCurrentMetakey[j] = response[j].data[k]['metadata-key'];
         reverseSource[j] = response[j].data[k]['source'];
         reverseDestination[j] = response[j].data[k]['destination'];
-
+        rsdns[j] = response[j].data[k]['input-source'];
+        rddns[j] = response[j].data[k]['input-destination'];
       }
 
     }
@@ -89,7 +95,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
     for (i = 0; i < respLength; i++) {
       var promiseIndex = 0;
       var promiseIndex2 = 0
-      var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/throughput/base?time-range=" + timerange;
+      var curURL = main + currentMetakey[i] + "/throughput/base?time-range=" + timerange;
       //format=json&
       console.log("curURL : " + curURL);
 
@@ -129,7 +135,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
 
       console.log("reverseCurrentMetakey : " + reverseCurrentMetakey[i]);
 
-      var urlReverseTrafficSub = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + reverseCurrentMetakey[i] + "/throughput/base?time-range=" + timerange;
+      var urlReverseTrafficSub = main + reverseCurrentMetakey[i] + "/throughput/base?time-range=" + timerange;
       console.log("urlReverseTrafficSub = " + urlReverseTrafficSub);
       //"&time-start="+convertedTimeStartStamp+"&time-end="+convertedTimeEndStamp;
       promises.push($http.get(urlReverseTrafficSub));
@@ -291,7 +297,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
           //console.log(currentMetakey[i]);
 
           //var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/throughput/base?format=json&time-start="+convertedTimeStartStamp+"&time-end="+convertedTimeEndStamp+"";
-          var curURL = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + currentMetakey[i] + "/throughput/base?time-range=" + timerange;
+          var curURL = main + currentMetakey[i] + "/throughput/base?time-range=" + timerange;
           //?format=json
           //console.log(curURL);
           //console.log(myService.getData(curURL));
@@ -337,7 +343,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
 
 
           //console.log(reverseCurrentMetakey[i]);
-          var urlReverseTrafficSub = "http://ps2.jp.apan.net/esmond/perfsonar/archive/" + reverseCurrentMetakey[i] + "/throughput/base?timerange=" + timerange;
+          var urlReverseTrafficSub = main + reverseCurrentMetakey[i] + "/throughput/base?timerange=" + timerange;
           console.log("urlReverseTrafficSub = " + urlReverseTrafficSub);
           //"&time-start="+convertedTimeStartStamp+"&time-end="+convertedTimeEndStamp;
           var promise3 = $http.get(urlReverseTrafficSub);
@@ -409,7 +415,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
 
 }]);
 
-
+/*
 app.factory('myService', function ($http) {
 
   var getData = function (curUrl) {
@@ -427,7 +433,8 @@ app.factory('myService', function ($http) {
 
   return {getData: getData};
 });
-
+*/
+/*
 bandwidth.service('UnixTimeConverterService', function () {
 
 
@@ -473,7 +480,7 @@ bandwidth.service('UnixTimeConverterService', function () {
     return timevalues;
   }
 });
-
+*/
 bandwidth.controller('SearchBW', ['$scope', '$http', 'UnixTimeConverterService', function ($scope, $http, UnixTimeConverterService) {
 
   var mainUrl = "http://ps2.jp.apan.net/esmond/perfsonar/archive/?event-type=throughput";

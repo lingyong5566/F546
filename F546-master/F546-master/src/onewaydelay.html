@@ -279,10 +279,6 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-
-          <div>
-            <!--<div id="latency_graph_cytoscape"></div> -->
-
 <div>
 <th><zingchart id="myChart" zc-json="myJson" zc-height=700 zc-width=1200></zingchart></th>
 <table border = "1" ng-repeat="(fIndex,f) in currentMetakey">
@@ -298,13 +294,13 @@
   </tr>
   <tr>
     <th colspan = "1"><center>Source</center></th>
-    <th colspan = "4"><center>{{source[$index]}}</center></th>
+    <th colspan = "4"><center>{{sdns[$index]}}</center></th>
     <th colspan = "1"><center>Destination</center></th>
-    <th colspan = "3"><center>{{destination[$index]}}</center></th>
+    <th colspan = "3"><center>{{ddns[$index]}}</center></th>
     <th colspan = "1"><center>Reverse Source</center></th>
-    <th colspan = "4"><center>{{reverseSource[$index]}}</center></th>
+    <th colspan = "4"><center>{{rsdns[$index]}}</center></th>
     <th colspan = "1"><center>Reverse Destination</center></th>
-    <th colspan = "4"><center>{{reverseDestination[$index]}}</center></th>
+    <th colspan = "4"><center>{{rddns[$index]}}</center></th>
   </tr>
   <tr>
     <th> Standard-Deviation</th>
@@ -359,8 +355,6 @@
         <!-- /.panel-body -->
       </div>
       <!-- /.panel -->
-    </div>
-    <!-- /.col-lg-8 -->
 
     <div class="col-lg-3">
 
@@ -396,39 +390,39 @@
 
 
 
-   <!--<span class="list-group-item">-->
-   <!--<i class="fa fa-th-list fasb-fw"></i>-->
-   <!--RTT Results:-->
-   <!--&lt;!&ndash;<div class="pull-right">VALUES GOES HERE</div>&ndash;&gt;-->
-   <!--</span>-->
+        <!--<span class="list-group-item">-->
+        <!--<i class="fa fa-th-list fasb-fw"></i>-->
+        <!--RTT Results:-->
+        <!--&lt;!&ndash;<div class="pull-right">VALUES GOES HERE</div>&ndash;&gt;-->
+        <!--</span>-->
 
 
-   <!--<div class="list-group">-->
-   <!--<div class="list-group">-->
-   <!--<span class="list-group-item">Minimum: <div class="pull-right">{{selectedPath.rttMin}}</div></span>-->
-   <!--<span class="list-group-item">Mean: <div class="pull-right">{{selectedPath.rttMean}}</div></span>-->
-   <!--<span class="list-group-item">Maximum: <div class="pull-right">{{selectedPath.rttMax}}</div></span>-->
+        <!--<div class="list-group">-->
+        <!--<div class="list-group">-->
+        <!--<span class="list-group-item">Minimum: <div class="pull-right">{{selectedPath.rttMin}}</div></span>-->
+        <!--<span class="list-group-item">Mean: <div class="pull-right">{{selectedPath.rttMean}}</div></span>-->
+        <!--<span class="list-group-item">Maximum: <div class="pull-right">{{selectedPath.rttMax}}</div></span>-->
 
 
-   <!--</div>-->
-   <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
 
-   <!--<a ng-href="" class="list-group-item"-->
-   <!--ng-class="{'list-group-item-danger': selectedPath.errorStatus, 'list-group-item-success': !selectedPath.errorStatus}"-->
-   <!--ng-click="loadHistorialTraceroutePath(selectedPath.metadata);">-->
-   <!--&lt;!&ndash;<i class="glyphicon fa-info" ng-class="{'glyphicon-ok': !selectedPath.errorStatus, 'glyphicon-remove': selectedPath.errorStatus}"></i>&ndash;&gt;-->
-   <!--<i class="fa fa-info fa-fw"></i>-->
-   <!--&lt;!&ndash;<i class="glyphicon" ng-class="{true:'glyphicon-ok', false:'glyphicon-remove'}"></i>&ndash;&gt;-->
+        <!--<a ng-href="" class="list-group-item"-->
+        <!--ng-class="{'list-group-item-danger': selectedPath.errorStatus, 'list-group-item-success': !selectedPath.errorStatus}"-->
+        <!--ng-click="loadHistorialTraceroutePath(selectedPath.metadata);">-->
+        <!--&lt;!&ndash;<i class="glyphicon fa-info" ng-class="{'glyphicon-ok': !selectedPath.errorStatus, 'glyphicon-remove': selectedPath.errorStatus}"></i>&ndash;&gt;-->
+        <!--<i class="fa fa-info fa-fw"></i>-->
+        <!--&lt;!&ndash;<i class="glyphicon" ng-class="{true:'glyphicon-ok', false:'glyphicon-remove'}"></i>&ndash;&gt;-->
 
-   <!--Error Status:-->
+        <!--Error Status:-->
 
-   <!--<div ng-if="selectedPath.errorStatus" class="pull-right"><span-->
-   <!--class="pull-right glyphicon glyphicon-remove"></span></div>-->
-   <!--<div ng-if="!selectedPath.errorStatus" class="pull-right"><span-->
-   <!--class="pull-right glyphicon glyphicon-ok"></span></div>-->
+        <!--<div ng-if="selectedPath.errorStatus" class="pull-right"><span-->
+        <!--class="pull-right glyphicon glyphicon-remove"></span></div>-->
+        <!--<div ng-if="!selectedPath.errorStatus" class="pull-right"><span-->
+        <!--class="pull-right glyphicon glyphicon-ok"></span></div>-->
 
-   <!--</a>-->
+        <!--</a>-->
 
           </div>
 
@@ -436,6 +430,10 @@
 
 
         </div>
+    </div>
+    <!-- /.col-lg-8 -->
+
+
         <!-- /.panel-body -->
       </div>
       <!-- /.panel -->

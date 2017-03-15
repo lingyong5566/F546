@@ -292,45 +292,6 @@ ipAddrDecodeServices.factory('DNSLookup', ['$http', '$log', 'CacheFactory', func
 
     }
 
-    // getDomain_Promise: function (IPAddress) {
-    //
-    //   if (CacheFactory.get("ReverseIPLookup").get(IPAddress)) {
-    //
-    //     return CacheFactory.get("ReverseIPLookup").get(IPAddress);
-    //
-    //   } else
-    //   {
-    //
-    //     var dnsLookup = $http({
-    //       method: 'GET',
-    //       url: host,
-    //       params: {
-    //         'ipaddress': IPAddress
-    //       },
-    //       cache: true,
-    //       ignoreLoadingBar: false
-    //
-    //     })
-    //
-    //     //   .then(function (response) {
-    //     //
-    //     //   var tempResult = {
-    //     //     ip: IPAddress,
-    //     //     dns: response.data.dns
-    //     //   }
-    //     //   // console.log(response)
-    //     //   if (response.data.dns != "Unknown") {
-    //     //     DNSCache.put(IPAddress, tempResult);
-    //     //   }
-    //     //
-    //     //   return tempResult;
-    //     //
-    //     //
-    //     // });
-    //     return dnsLookup;
-    //   }
-    //
-    // }
 
 
   };
