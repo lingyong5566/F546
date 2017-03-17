@@ -33,7 +33,7 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
   var promiseIndex1 = 0;
 
   var timerange = 86400;
-  timerange = 86400;
+  timerange = 86400*3;
   var FCindex = 0.9;
   var FCindex2 = 0.85;
 
@@ -60,8 +60,8 @@ bandwidth.controller('BandwidthCtrl', ['$scope', '$q',  '$location', '$http', 'U
           currentMetakey[i] = response.data[i]['metadata-key'];
           source[i] = response.data[i]['source'];
           destination[i] = response.data[i]['destination'];
-          sdns[j] = response.data[i]['input-source'];
-          ddns[j] = response.data[k]['input-destination'];
+          sdns[i] = response.data[i]['input-source'];
+          ddns[i] = response.data[i]['input-destination'];
         }
       }
     ).then(function (r2) {
