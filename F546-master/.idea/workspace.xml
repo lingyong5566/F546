@@ -26,9 +26,17 @@
       <file leaf-file-name="generalService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/services/generalService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="2363">
+              <caret line="139" column="6" selection-start-line="139" selection-start-column="6" selection-end-line="139" selection-end-column="6" />
+              <folding>
+                <marker date="1489930913904" expanded="true" signature="7066:7067" ph="//..." />
+                <marker date="1489930913904" expanded="true" signature="7109:7369" ph="{...}" />
+                <marker date="1489930913904" expanded="true" signature="7184:7362" ph="{...}" />
+                <marker date="1489930913904" expanded="true" signature="7455:8621" ph="{...}" />
+                <marker date="1489930913904" expanded="true" signature="7514:7792" ph="{...}" />
+                <marker date="1489930913904" expanded="true" signature="7830:7970" ph="{...}" />
+                <marker date="1489930913904" expanded="true" signature="7989:8615" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -36,10 +44,10 @@
       <file leaf-file-name="DelayCtrl.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Ping/DelayCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+            <state relative-caret-position="1632">
+              <caret line="98" column="6" selection-start-line="98" selection-start-column="6" selection-end-line="98" selection-end-column="20" />
               <folding>
-                <marker date="1489646922646" expanded="true" signature="16097:16098" ph="{...}" />
+                <marker date="1489930459395" expanded="true" signature="16490:16491" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -48,8 +56,8 @@
       <file leaf-file-name="onewaydelay.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/F546-master/src/onewaydelay.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5066">
-              <caret line="298" column="50" selection-start-line="298" selection-start-column="50" selection-end-line="298" selection-end-column="50" />
+            <state relative-caret-position="187">
+              <caret line="296" column="44" selection-start-line="296" selection-start-column="32" selection-end-line="296" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -78,21 +86,21 @@
       <file leaf-file-name="BandwidthCtrl.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Bandwidth/BandwidthCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+            <state relative-caret-position="459">
+              <caret line="429" column="21" selection-start-line="429" selection-start-column="21" selection-end-line="429" selection-end-column="21" />
               <folding>
-                <marker date="1489647220188" expanded="true" signature="5427:6842" ph="{...}" />
-                <marker date="1489647220188" expanded="true" signature="18416:18806" ph="{...}" />
-                <marker date="1489647220188" expanded="true" signature="18453:18772" ph="{...}" />
-                <marker date="1489647220188" expanded="true" signature="18581:18766" ph="{...}" />
-                <marker date="1489647220188" expanded="true" signature="18628:18730" ph="//..." />
-                <marker date="1489647220188" expanded="true" signature="18873:20004" ph="{...}" />
-                <marker date="1489647220188" expanded="true" signature="18915:19454" ph="{...}" />
-                <marker date="1489647220188" expanded="true" signature="19225:19425" ph="[...]" />
-                <marker date="1489647220188" expanded="true" signature="19345:19419" ph="//..." />
-                <marker date="1489647220188" expanded="true" signature="19494:20002" ph="{...}" />
-                <marker date="1489647220188" expanded="true" signature="19851:19889" ph="{...}" />
-                <marker date="1489647220188" expanded="true" signature="19911:19973" ph="[...]" />
+                <marker date="1490829235795" expanded="true" signature="5956:7900" ph="{...}" />
+                <marker date="1490829235795" expanded="true" signature="19567:19957" ph="{...}" />
+                <marker date="1490829235795" expanded="true" signature="19604:19923" ph="{...}" />
+                <marker date="1490829235795" expanded="true" signature="19732:19917" ph="{...}" />
+                <marker date="1490829235795" expanded="true" signature="19779:19881" ph="//..." />
+                <marker date="1490829235795" expanded="true" signature="20024:21155" ph="{...}" />
+                <marker date="1490829235795" expanded="true" signature="20066:20605" ph="{...}" />
+                <marker date="1490829235795" expanded="true" signature="20376:20576" ph="[...]" />
+                <marker date="1490829235795" expanded="true" signature="20496:20570" ph="//..." />
+                <marker date="1490829235795" expanded="true" signature="20645:21153" ph="{...}" />
+                <marker date="1490829235795" expanded="true" signature="21002:21040" ph="{...}" />
+                <marker date="1490829235795" expanded="true" signature="21062:21124" ph="[...]" />
               </folding>
             </state>
           </provider>
@@ -101,11 +109,11 @@
       <file leaf-file-name="bandwidth.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/F546-master/src/bandwidth.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="408">
+              <caret line="333" column="37" selection-start-line="333" selection-start-column="37" selection-end-line="333" selection-end-column="37" />
               <folding>
                 <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
-                <marker date="1484255776324" expanded="true" signature="8732:8742" ph="..." />
+                <marker date="1490829157390" expanded="true" signature="8732:8742" ph="..." />
               </folding>
             </state>
           </provider>
@@ -159,14 +167,14 @@
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/LineChart.js" />
         <option value="$PROJECT_DIR$/F546-master/src/index.html" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/HoltWinterForecast.js" />
-        <option value="$PROJECT_DIR$/F546-master/src/bandwidth.html" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Traceroute/TracerouteListCtrl.js" />
-        <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/generalService.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/IPAddrDecoderService.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Latency/LatencyCtrl.js" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/latencyService.js" />
         <option value="$PROJECT_DIR$/F546-master/src/onewaydelay.html" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Ping/DelayCtrl.js" />
+        <option value="$PROJECT_DIR$/F546-master/src/app/scripts/services/generalService.js" />
+        <option value="$PROJECT_DIR$/F546-master/src/bandwidth.html" />
         <option value="$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Bandwidth/BandwidthCtrl.js" />
       </list>
     </option>
@@ -210,7 +218,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -437,6 +444,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -561,11 +569,14 @@
       <workItem from="1489460686807" duration="4644000" />
       <workItem from="1489534435886" duration="19338000" />
       <workItem from="1489644690071" duration="1649000" />
+      <workItem from="1489796188566" duration="6607000" />
+      <workItem from="1489903690544" duration="14353000" />
+      <workItem from="1490828931899" duration="1103000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227559000" />
+    <option name="totallyTimeSpent" value="249622000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1854" height="1080" extended-state="0" />
@@ -625,7 +636,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -706,7 +717,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1484255776324" expanded="true" signature="8732:8742" ph="..." />
+            <marker date="1490829157390" expanded="true" signature="8732:8742" ph="..." />
           </folding>
         </state>
       </provider>
@@ -759,7 +770,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1484255776324" expanded="true" signature="8732:8742" ph="..." />
+            <marker date="1490829157390" expanded="true" signature="8732:8742" ph="..." />
           </folding>
         </state>
       </provider>
@@ -883,46 +894,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/services/generalService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/F546-master/src/onewaydelay.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5066">
-          <caret line="298" column="50" selection-start-line="298" selection-start-column="50" selection-end-line="298" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/F546-master/src/latency.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/F546-master/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/F546-master/src/bandwidth.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
-            <marker date="1484255776324" expanded="true" signature="8732:8742" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -950,33 +926,76 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/F546-master/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Ping/DelayCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+        <state relative-caret-position="1632">
+          <caret line="98" column="6" selection-start-line="98" selection-start-column="6" selection-end-line="98" selection-end-column="20" />
           <folding>
-            <marker date="1489646922646" expanded="true" signature="16097:16098" ph="{...}" />
+            <marker date="1489930459395" expanded="true" signature="16490:16491" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/services/generalService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2363">
+          <caret line="139" column="6" selection-start-line="139" selection-start-column="6" selection-end-line="139" selection-end-column="6" />
+          <folding>
+            <marker date="1489930913904" expanded="true" signature="7066:7067" ph="//..." />
+            <marker date="1489930913904" expanded="true" signature="7109:7369" ph="{...}" />
+            <marker date="1489930913904" expanded="true" signature="7184:7362" ph="{...}" />
+            <marker date="1489930913904" expanded="true" signature="7455:8621" ph="{...}" />
+            <marker date="1489930913904" expanded="true" signature="7514:7792" ph="{...}" />
+            <marker date="1489930913904" expanded="true" signature="7830:7970" ph="{...}" />
+            <marker date="1489930913904" expanded="true" signature="7989:8615" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/F546-master/src/bandwidth.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="333" column="37" selection-start-line="333" selection-start-column="37" selection-end-line="333" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" expanded="false" />
+            <marker date="1490829157390" expanded="true" signature="8732:8742" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/F546-master/src/onewaydelay.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="296" column="44" selection-start-line="296" selection-start-column="32" selection-end-line="296" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/F546-master/src/app/scripts/controllers/Bandwidth/BandwidthCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+        <state relative-caret-position="459">
+          <caret line="429" column="21" selection-start-line="429" selection-start-column="21" selection-end-line="429" selection-end-column="21" />
           <folding>
-            <marker date="1489647220188" expanded="true" signature="5427:6842" ph="{...}" />
-            <marker date="1489647220188" expanded="true" signature="18416:18806" ph="{...}" />
-            <marker date="1489647220188" expanded="true" signature="18453:18772" ph="{...}" />
-            <marker date="1489647220188" expanded="true" signature="18581:18766" ph="{...}" />
-            <marker date="1489647220188" expanded="true" signature="18628:18730" ph="//..." />
-            <marker date="1489647220188" expanded="true" signature="18873:20004" ph="{...}" />
-            <marker date="1489647220188" expanded="true" signature="18915:19454" ph="{...}" />
-            <marker date="1489647220188" expanded="true" signature="19225:19425" ph="[...]" />
-            <marker date="1489647220188" expanded="true" signature="19345:19419" ph="//..." />
-            <marker date="1489647220188" expanded="true" signature="19494:20002" ph="{...}" />
-            <marker date="1489647220188" expanded="true" signature="19851:19889" ph="{...}" />
-            <marker date="1489647220188" expanded="true" signature="19911:19973" ph="[...]" />
+            <marker date="1490829235795" expanded="true" signature="5956:7900" ph="{...}" />
+            <marker date="1490829235795" expanded="true" signature="19567:19957" ph="{...}" />
+            <marker date="1490829235795" expanded="true" signature="19604:19923" ph="{...}" />
+            <marker date="1490829235795" expanded="true" signature="19732:19917" ph="{...}" />
+            <marker date="1490829235795" expanded="true" signature="19779:19881" ph="//..." />
+            <marker date="1490829235795" expanded="true" signature="20024:21155" ph="{...}" />
+            <marker date="1490829235795" expanded="true" signature="20066:20605" ph="{...}" />
+            <marker date="1490829235795" expanded="true" signature="20376:20576" ph="[...]" />
+            <marker date="1490829235795" expanded="true" signature="20496:20570" ph="//..." />
+            <marker date="1490829235795" expanded="true" signature="20645:21153" ph="{...}" />
+            <marker date="1490829235795" expanded="true" signature="21002:21040" ph="{...}" />
+            <marker date="1490829235795" expanded="true" signature="21062:21124" ph="[...]" />
           </folding>
         </state>
       </provider>

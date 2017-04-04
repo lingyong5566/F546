@@ -21,7 +21,7 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTi
   warningValue = 0.6;
   minorValue = 0.2;
 
-
+  var HW = false;
   var host = "http://203.30.39.133/reversednslookup";
   var host2 = "http://geoip.nekudo.com/api/";
 
@@ -30,6 +30,8 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTi
   var fullDataList = [];
   var HWForecastResult = [];
   var FCindex = 0.5;
+  var beta = 0.029;
+  var gamma = 0.993;
   var errorInformation1 = [];
   var errorInformation2 = [];
   var errorInformation3 = [];
@@ -93,7 +95,11 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTi
 
 
       }
-      HWForecastResult[i] = HWForecast.HWFunction(resp[i].data, FCindex, "delay");
+      //console.log("Calling HWFunction3");
+      if(HW == true)
+        HWForecastResult[i] = HWForecast.HWFunction3(resp[i].data, FCindex, "delay",beta,gamma);
+      else
+        HWForecastResult[i] = HWForecast.HWFunction(resp[i].data, FCindex, "delay");
       //console.log("resp1 " + promiseIndex + "= " + resp.data);
       fullDataList[i] = resp[i].data;
       //console.log("fulldataList " + promiseIndex + "= " + fullDataList[promiseIndex]);
@@ -113,8 +119,8 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTi
     $scope.destination = destination;
     $scope.fullDataList = fullDataList;
     $scope.HWForecastResult = HWForecastResult;
-    console.log("sdns : " + sdns);
-    console.log("ddns : " + ddns);
+    //console.log("sdns : " + sdns);
+    //console.log("ddns : " + ddns);
     $scope.sdns = sdns;
     $scope.ddns = ddns;
 
@@ -168,7 +174,10 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTi
 
 
       }
-      reverseHWForecastResult[i] = HWForecast.HWFunction(response[i].data, FCindex, "delay");
+      if(HW == true)
+        reverseHWForecastResult[i] = HWForecast.HWFunction3(response[i].data, FCindex, "delay",beta,gamma);
+      else
+        reverseHWForecastResult[i] = HWForecast.HWFunction(response[i].data, FCindex, "delay");
       //console.log("resp1 " + promiseIndex + "= " + resp.data);
       reverseFullDataList[i] = response[i].data;
       //console.log("fulldataList " + promiseIndex + "= " + fullDataList[promiseIndex]);
@@ -177,7 +186,7 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTi
 
 
       //console.log("scope = " + $scope.fullDataList);
-      console.log("[0] = " + reverseFullDataList[1]);
+      //console.log("[0] = " + reverseFullDataList[1]);
       //console.log("whole = " + fullDataList);
 
       $scope.reverseFullDataList = reverseFullDataList;
@@ -243,7 +252,7 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTi
         response[i].data[j]['ts'] = time2 + " " + date2;
 
         response[i].data[j]['val'] = math.round((response[i].data[j]['val'] ), 5);
-        console.log(response[i].data[j]);
+        //console.log(response[i].data[j]);
 
 
       }
@@ -257,7 +266,7 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTi
     var promises = [];
     for (i = 0; i < currentMetakey.length; i++) {
       var mostRecentURL = baseURL + currentMetakey[i] + "/packet-loss-rate/aggregations/" + "3600" + "?time-range=" + mostRecentTime;
-      console.log("mostRecentURL = " + mostRecentURL);
+      //console.log("mostRecentURL = " + mostRecentURL);
       promises.push($http.get(mostRecentURL));
     }
     return $q.all(promises);
@@ -279,7 +288,7 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTi
           }
         }
 
-        console.log("parseFloat(response[i].data[j]['val'])"+parseFloat(response[i].data[j]['val']));
+        //console.log("parseFloat(response[i].data[j]['val'])"+parseFloat(response[i].data[j]['val']));
         if(parseFloat(response[i].data[j]['val']) >= criticalValue){
           var pairValue = [currentMetakey[i],math.round((response[i].data[j]['val'] ), 5)];
           errorInformation1.push(pairValue);
@@ -309,9 +318,9 @@ app.controller('DelayCtrl', ["$scope", "$q", "$http", "$log",'myService','UnixTi
     $scope.errorInformation3 = errorInformation3;
 
 
-    console.log("errorInformation1 : "+errorInformation1);
-    console.log("errorInformation2 : "+errorInformation2);
-    console.log("errorInformation3 : "+errorInformation3);
+    //console.log("errorInformation1 : "+errorInformation1);
+    //console.log("errorInformation2 : "+errorInformation2);
+    //console.log("errorInformation3 : "+errorInformation3);
     return $q.all(promises);
 
   });
